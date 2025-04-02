@@ -1,0 +1,5 @@
+_target_: src.classifier.naive_bayes.Naive_Bayes_Classifier
+
+config:
+  name: "naive_bayes"
+  alpha: 0.5 # For laplace smoothing

@@ -1,0 +1,10 @@
+# Data
+/data
+
+# Results
+/results
+
+# Python
+*.pyc
+*.pyo
+__pycache__/*

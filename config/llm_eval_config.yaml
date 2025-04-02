@@ -1,0 +1,9 @@
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+
+results_dir: null
+
+defaults:
+  - data: null

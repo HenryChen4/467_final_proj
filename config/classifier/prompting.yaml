@@ -1,0 +1,6 @@
+_target_: src.classifier.prompting.Prompting_Classifier
+
+llm: null
+config:
+  name: "prompting"
+  prompt: ${prompts.prompts.${prompt}}

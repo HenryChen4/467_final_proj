@@ -1,0 +1,14 @@
+hydra:
+  run:
+    dir: results/${now:%Y-%m-%d_%H-%M-%S}_${hydra.job.name}_${classifier.config.name}
+
+n_classifiers: 3
+
+defaults:
+  - _self_ 
+  - llm: null
+  - classifier: null
+  - data: null
+  - prompts: prompts
+
+prompt: ${prompts}

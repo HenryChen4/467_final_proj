@@ -1,0 +1,12 @@
+_target_: src.data_parsing.data_parsing.Emotion_Data_Parser
+
+config:
+  root_dir: "./data/"
+
+  csv: "./main_data.csv"
+  
+  # for splitting
+  train_split: 0.7
+  test_split: 0.15
+  val_split: 0.15
+  seed: 489149 # 42 past run

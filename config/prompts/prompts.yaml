@@ -1,0 +1,17 @@
+prompts:
+  prompt_1: "Read the following text carefully. Based on the content, \
+             language, and emotional cues, determine which of these \
+             categories best describes the mental state of the writer: \
+             Normal \
+             Depression \
+             Suicidal \
+             Anxiety \
+             Stress \
+             Bipolar \ 
+             Personality disorder \
+             Output only the category. \
+             Text: \"{text}\""
+
+  prompt_2: "prompt_2"
+
+  prompt_3: "prompt_3"
