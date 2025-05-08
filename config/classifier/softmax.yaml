@@ -9,14 +9,14 @@ config:
   # for lstm
   bidirectional: False
   lstm_layers: 1
-  embedding_dim: 100
+  embedding_dim: 50
 
   # for softmax
-  max_len: 200
-  latent_dim: 50
-  batch_size: 32
+  max_len: 100
+  latent_dim: 30
+  batch_size: 64
   output_dim: 7 # 7 different classes
   lr: 0.01 # best for adam
   epochs: 500
   num_hidden_layers: 3
-  num_hidden_units: 200
+  num_hidden_units: 50
