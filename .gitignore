@@ -3,6 +3,7 @@
 
 # Results
 /results
+/data_results
 
 # Python
 *.pyc

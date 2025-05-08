@@ -8,4 +8,5 @@ results_dir: null
 
 defaults:
   - _self_
+  - classifier: null
   - data: null

@@ -44,10 +44,10 @@ def main(cfg: DictConfig):
     mv_responses = majority_vote(cleaned_responses)
 
     # Get metrics
-    dataset = test_loader.dataset
+    true_labels = [label[0] for _, label in test_loader]
     mv_key_indices = list(mv_responses.keys())
 
-    y_true = [dataset[int(i)][1].lower() for i in mv_key_indices]
+    y_true = [true_labels[int(i)].lower() for i in mv_key_indices]
     y_pred = [mv_responses[i]["majority"] for i in mv_key_indices]
     
     save_metrics(y_true, y_pred, output_dir)

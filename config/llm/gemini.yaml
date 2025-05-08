@@ -1,5 +1,5 @@
 _target_: src.llms.gemini.Gemini_Agent
-api_key: "AIzaSyAH3YLfjh83wQXqXINOcJhycmGswXX1Ang" 
+api_key: "AIzaSyD9ncbi4jtMT1iS0t0yv8nRg9ImUMwH9Bo" #benrygta@gmail.com 
 config:
   llm_configs:
     config_1:

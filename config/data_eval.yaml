@@ -1,6 +1,7 @@
 hydra:
   run:
-    dir: data_statistics/${now:%Y-%m-%d_%H-%M-%S}_${hydra.job.name}
+    dir: data_results/${now:%Y-%m-%d_%H-%M-%S}_${hydra.job.name}
 
 defaults:
+  - _self_
   - data: null

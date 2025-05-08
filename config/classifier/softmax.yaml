@@ -1,0 +1,22 @@
+_target_: src.classifier.softmax.Softmax_Classifier
+
+config:
+  name: "softmax_classifier"
+  
+  # Classifier settings
+  learning_rate: 0.01
+
+  # for lstm
+  bidirectional: False
+  lstm_layers: 1
+  embedding_dim: 100
+
+  # for softmax
+  max_len: 200
+  latent_dim: 50
+  batch_size: 32
+  output_dim: 7 # 7 different classes
+  lr: 0.01 # best for adam
+  epochs: 500
+  num_hidden_layers: 3
+  num_hidden_units: 200
