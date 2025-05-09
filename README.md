@@ -65,3 +65,5 @@ python -m src.tuning results_dir=./results/<classifier_name>_tuning classifier=<
 ```
 
 `## Note: The directory ./results/<classifier_name>_tuning must already exist`
+
+If you want to try out your own hyperparameters, the yaml files for each classifier and the data contain values to edit.
