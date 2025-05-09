@@ -1,5 +1,6 @@
 prompts:
-  prompt_1: "Read the following text carefully. Based on the content, \
+  prompt_1: "Each example demonstrates the language and emotional patterns associated with its category. \
+             Now Read the following text carefully. Based on the content, \
              language, and emotional cues, determine which of these \
              categories best describes the mental state of the writer: \
              Normal \

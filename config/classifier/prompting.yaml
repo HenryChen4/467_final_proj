@@ -4,3 +4,75 @@ llm: null
 config:
   name: "prompting"
   prompt: ${prompts.prompts.${prompt}}
+
+  use_fewshot: False
+  random_example_seed: 413
+
+  fewshot_desc:
+    normal:
+    - |
+      The above text sample reflects everyday communication patterns, including self-reflection, commentary on others, 
+      and expressions of empathy. Although it may contain references to struggle or emotional tone, it lacks sustained 
+      signs of psychological distress, clinical symptoms, or abnormal behavior patterns. Instead, it shows resilience, 
+      perspective, or social responsiveness—features typically associated with normative mental functioning. Such utterances
+       are best understood as "Normal".
+    depression:
+    - |
+      The above text reflects underlying emotional distress, a sense of hopelessness, or diminished desire to continue engaging with life. 
+      The tone and content suggest internalized pain or low mood, which are characteristic markers of depression. Even when coping 
+      mechanisms or moments of clarity are present, the overall sentiment points toward a "Depression" classification
+    suicidal:
+    - |
+      The above statement contains direct or strongly implied suicidal ideation, such as expressions of self-harm, hopelessness, or 
+      planning of one’s own death. The language reflects a mindset that is either contemplating, normalizing, or actively seeking 
+      means to end life—making it indicative of a "Suicidal" classification.
+    anxiety:
+    - |
+      The above statement expresses excessive worry, nervousness, or persistent overthinking—hallmarks of anxiety. The speaker shows signs 
+      of mental unrest, often triggered by everyday situations or internal thoughts, which disrupt their emotional or physical well-being.
+      This text will fall under the "Anxiety" classification.
+    stress:
+    - |
+      The above statement reflects emotional or mental strain caused by external pressures, responsibilities, or ongoing difficult circumstances. 
+      It conveys a sense of being overwhelmed, burned out, or actively seeking ways to manage or reduce stress, aligning it with the "Stress" classification.
+    bipolar:
+    - |
+      The above statement includes references to mood instability, such as shifts between depressive and manic states, impulsivity, or medication related to 
+      bipolar disorder. It reflects the characteristic emotional and behavioral fluctuations associated with bipolar conditions. Thus this text is classified
+      as "Bipolar".
+    personality disorder:
+    - |
+      The above statement reflects enduring patterns of inner experience and behavior that deviate significantly from cultural expectations, 
+      particularly involving identity disturbance, chronic emptiness, or difficulty with self-concept. The tone and themes suggest 
+      pervasive struggles with self-image, interpersonal functioning, or emotional regulation—consistent with symptoms found in personality disorders.
+      This statement is therefore classified as "Personality Disorder".
+
+  fewshot_examples:
+    normal:
+      - When I was in high school, I wasn't smart, I had a lot of SP, etc. But since college, my brain has started to develop, right, so my high school friends still think I'm "stupid", as a result, when I was in college, I graduated 3.5 years, while many of them didn't graduate, the college wasn't right, etc. Yes, it's called life.
+      - hiiragi shinya why is your life story so tragic
+      - stephenkruiser that s horrible sorryto hear that
+    depression:
+      - theekween heart break trauma anxiety depression pain of losing your loved one thelmasherbs
+      - In the end, I know what is best for myself, right?Ill finally be able to be happy. Can there just be a day where I do not wake up
+      - Anyone else feel like their dog is the reason for living? Knowing something else in this world needs me and is always happy in my presence gives me reason to get up. Dog saved my life
+    suicidal:
+      - Self mutilation is the key to great success Just some thing interesting.
+      - I am contemplating joining the forces to be at the top of the fall out. I consider myself fairly fit, and have a go bag but what are the feelings overall in this community. Do we give up- or would sociatal collapse be out reason to fight?? Guys. Are we nearing the end. Id like to know.
+      - i want to kill myself i already know how i just want to know where is the best place , i do not want the person to find me to be family nor friends so where do i do it ? where is the best place to do it , i do not want to do it in my house
+    anxiety:
+      - It's a habit from elementary school if I think about something I'll get worried I can't sleep
+      - I'm even worried about myself :((
+      - The script is harmless. But continuing anxiety because the thesis is not finished can be dangerous for the heart.
+    stress:
+      - Wanna Do a Stress quiz? Hello! I'm doing an assignment for my school about stress and I need reposnses. This survey is about the stressful situations many face throughout their lives. Although this survey may not be 100% accurate or realistic all I need are responses! And no worries this is 100% anonymous except for your age :D Here is the link to the Google form if you guys want to fill out the survey ---&gt; https://forms.gle/Kk3Sw7QhcgwB4JDH6
+      - ny gf had a shitty life Mine hasn't been to much better but shell go into depressive states and I try my best to help, I don't know how much longer I can support her especially when I don't feel my best
+      - Stress relief Does anyone know the best ways to relieve stress that aren’t google search results? (I.e I don’t want to hear about exercise, eat healthy etc)
+    bipolar:
+      - Does anyone have a recommendation for a good pill cutter? The two I have blow.
+      - Vraylar Hey guys I posted this on another forum but I was just seeing if anyone has taken it or heard good word about. I’m on lithium for my bipolar 1 and it’s severe but I was wondering if vraylar is good too?! Stay strong guys:D -MTA
+      - impulsive while depressed I feel like I always get impulsive when manic, but also impulsive when depressed. I relapse on drugs more when depressed and I do more risky behaviors in an effort to feel something better then how I feel. When I’m depressed I’m Impulsive in order to escape the feeling I have vs when I’m manic I’m impulsive because I don’t think things through and everything is a good idea that needs to be done then and now.
+    personality disorder:
+      - I feel like I'm a side character in my own life. I avoid literally everything. And it made me feel like nonexistence. I just exist. And I'm used to it . Why  am i still living? What's my purpose? I'm fad up .
+      - I can't pretend anymore. I can't market myself anymore. I can't pretend that I have more going for me than I do. I just can't.
+      - Anhedonia Do you have anhedonia / lack of strong emotions? [View Poll](https://www.reddit.com/poll/11px78z)

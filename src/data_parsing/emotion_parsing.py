@@ -80,14 +80,14 @@ class Emotion_Data_Parser(Parser_Base):
 
     def fill_dataloaders(self):
         whole_df = pd.read_csv(self.csv_data, index_col=False) 
-        # balanced_df = self.balance_data(whole_df=whole_df)
+        balanced_df = self.balance_data(whole_df=whole_df)
         
         train_df_list = []
         test_df_list = []
         val_df_list = []
 
         for label in self.labels:
-            train_df, test_df, val_df = self.create_splits(whole_df=whole_df, label=label)
+            train_df, test_df, val_df = self.create_splits(whole_df=balanced_df, label=label)
             train_df_list.append(train_df)
             test_df_list.append(test_df)
             val_df_list.append(val_df)
@@ -167,12 +167,18 @@ class Emotion_Data_Parser(Parser_Base):
         return DataLoader(dataset, batch_size=batch_size, shuffle=False)
 
     def tokens_to_words(self, data_loader):
-        all_decoded = []
+        all_decoded_inputs = []
+        all_decoded_labels = []
 
-        for batch_inputs, _ in data_loader:
+        for batch_inputs, batch_labels in data_loader:
             for token_ids in batch_inputs:
                 indices = token_ids.tolist()
                 words = self.vocab.lookup_tokens(indices)
-                all_decoded.append(words)
+                all_decoded_inputs.append(words)
 
-        return all_decoded
+            for label_token_id in batch_labels:
+                index = label_token_id.item()
+                label = self.label_vocab.lookup_tokens([index])
+                all_decoded_labels.append(label[0])
+
+        return all_decoded_inputs, all_decoded_labels

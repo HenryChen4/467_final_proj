@@ -7,13 +7,14 @@ import torch
 from pathlib import Path
 from omegaconf import DictConfig, OmegaConf
 from hydra.core.hydra_config import HydraConfig
+from matplotlib import pyplot as plt
 
 from src.classifier.softmax import Softmax_Classifier
 from src.utils.majority_vote import generate_annotations
 from src.utils.metrics import save_metrics
 
-from matplotlib import pyplot as plt
 import numpy as np
+import matplotlib as mpl
 
 # TODO:
 # 1. Tune hyperparameters with validation set **DONE
@@ -48,8 +49,25 @@ def main(cfg: DictConfig):
         classifier = initialize_softmax(cfg.classifier, text_vocab, label_vocab)
         epoch_losses = classifier.train(train_loader)
 
-        plt.plot(np.arange(len(epoch_losses)), epoch_losses)
-        plt.show()
+        mpl.rcParams.update({
+            "font.family": "serif",
+            "font.size": 9,
+            "axes.titlesize": 9,
+            "axes.labelsize": 9,
+            "xtick.labelsize": 8,
+            "ytick.labelsize": 8,
+            "legend.fontsize": 8,
+            "pdf.fonttype": 42,
+        })
+        colors = ['tab:blue', 'tab:orange', 'tab:green']
+
+        plt.plot(np.arange(len(epoch_losses)), epoch_losses, color=colors[0])
+        plt.xlabel('Epochs')
+        plt.ylabel('Cross Entropy Loss')
+        plt.title('Learning Curve')
+        plt.grid(True, linestyle='--', alpha=0.5)
+        plt.tight_layout()
+        plt.savefig(os.path.join(output_dir, "training_loss.png"))
 
     # Run and store predictions
     if "naive_bayes" in cfg.classifier._target_:
@@ -68,7 +86,19 @@ def main(cfg: DictConfig):
                                  text_samples=text_test_samples,
                                  output_dir=output_dir)
     elif "softmax" in cfg.classifier._target_:
-        pass    
+        possible_labels = []
+        for _, token in enumerate(label_vocab.get_itos()):
+            possible_labels.append(token)
+
+        test_pred = classifier.predict(test_loader)
+
+        pred_labels = []
+        for p in test_pred:
+            pred_labels.append(possible_labels[p])
+
+        _, true_labels = parser_obj.tokens_to_words(test_loader)
+        
+        save_metrics(true_labels, pred_labels, output_dir)
 
 def initialize_data(data_cfg):
     parser_obj = hydra.utils.instantiate(

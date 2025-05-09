@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.nn.init as init
 from tqdm import tqdm, trange
 
 from src.classifier.classifier_base import Classifier_Base
@@ -36,16 +37,23 @@ class MLP(nn.Module):
         self.num_hidden_units = config.num_hidden_units
 
         self.architecture = [nn.Linear(input_dim, self.num_hidden_units),
-                             nn.ReLU()]
+                             nn.ReLU(),
+                             nn.Dropout(self.config.dropout_prob)]
 
         for i in range(self.num_hidden_layers):
             self.architecture.append(nn.Linear(self.num_hidden_units, self.num_hidden_units))
             self.architecture.append(nn.ReLU())
+            self.architecture.append(nn.Dropout(self.config.dropout_prob))
 
         self.architecture.append(nn.Linear(self.num_hidden_units, output_dim))
-        self.architecture.append(nn.Softmax(dim=1))
 
         self.model = nn.Sequential(*self.architecture)
+
+        for layer in self.model:
+            if isinstance(layer, nn.Linear):
+                init.xavier_uniform_(layer.weight)
+                if layer.bias is not None:
+                    init.zeros_(layer.bias)
 
     def forward(self, x):
         return self.model(x)
@@ -56,7 +64,7 @@ class Softmax_Classifier(nn.Module):
         self.config = config
     
     def finish_initialization(self, text_vocab, label_vocab):
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
         self.encoder = LSTM(self.config, text_vocab).to(self.device)
         self.classifier = MLP(self.config, 
                               input_dim=self.config.latent_dim * 2 if self.config.bidirectional else self.config.latent_dim,
@@ -75,6 +83,7 @@ class Softmax_Classifier(nn.Module):
 
         for epoch in trange(self.config.epochs):
             avg_loss = 0
+
             for x, y in train_loader:
                 x = x.to(self.device)
                 y = y.to(self.device)
@@ -84,17 +93,18 @@ class Softmax_Classifier(nn.Module):
                 loss = criterion(logits, y)
                 loss.backward()
                 optimizer.step()
-                avg_loss += loss
+                avg_loss += loss.item()
 
-            print(avg_loss)
+            print(f"BATCH LOSS: {avg_loss/len(train_loader)}")
             epoch_loss.append(avg_loss/len(train_loader))
+
+        return epoch_loss
 
     def predict(self, test_loader):
         all_preds = []
         with torch.no_grad():
             for x, _ in test_loader:
-                x.to(self.device)
-
+                x = x.to(self.device)
                 logits = self.forward(x)
                 preds = torch.argmax(logits, dim=1)
                 all_preds.append(preds.cpu())

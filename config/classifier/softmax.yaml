@@ -2,21 +2,17 @@ _target_: src.classifier.softmax.Softmax_Classifier
 
 config:
   name: "softmax_classifier"
-  
-  # Classifier settings
-  learning_rate: 0.01
 
   # for lstm
-  bidirectional: False
+  bidirectional: True
   lstm_layers: 1
-  embedding_dim: 50
+  embedding_dim: 128
 
   # for softmax
-  max_len: 100
-  latent_dim: 30
-  batch_size: 64
-  output_dim: 7 # 7 different classes
-  lr: 0.01 # best for adam
-  epochs: 500
-  num_hidden_layers: 3
-  num_hidden_units: 50
+  latent_dim: 32
+  batch_size: 32
+  lr: 0.001 # best for adam
+  epochs: 200
+  num_hidden_layers: 2
+  num_hidden_units: 30
+  dropout_prob: 0.7

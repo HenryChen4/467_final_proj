@@ -41,20 +41,20 @@ def show_confusion_matrix(confusion_matrix,
 
 def save_metrics(y_true, y_pred, results_dir):
     accuracy = accuracy_score(y_true, y_pred)
-    precision = precision_score(y_true, y_pred, average='macro')
+    precision = precision_score(y_true, y_pred, average='macro', zero_division=0)
     recall = recall_score(y_true, y_pred, average='macro', zero_division=0)
-    f1 = f1_score(y_true, y_pred, average='macro')
+    f1 = f1_score(y_true, y_pred, average='macro', zero_division=0)
 
     print(f"Accuracy: {accuracy_score(y_true, y_pred)}")
-    print(f"Precision: {precision_score(y_true, y_pred, average='macro')}")
+    print(f"Precision: {precision_score(y_true, y_pred, average='macro', zero_division=0)}")
     print(f"Recall: {recall_score(y_true, y_pred, average='macro', zero_division=0)}")
-    print(f"F1: {f1_score(y_true, y_pred, average='macro')}")
+    print(f"F1: {f1_score(y_true, y_pred, average='macro', zero_division=0)}")
 
     with open(os.path.join(results_dir, "scores.txt"), "w") as f:
         f.write(f"Accuracy: {accuracy_score(y_true, y_pred)}\n")
-        f.write(f"Precision: {precision_score(y_true, y_pred, average='macro')}\n")
+        f.write(f"Precision: {precision_score(y_true, y_pred, average='macro', zero_division=0)}\n")
         f.write(f"Recall: {recall_score(y_true, y_pred, average='macro', zero_division=0)}\n")
-        f.write(f"F1: {f1_score(y_true, y_pred, average='macro')}\n")
+        f.write(f"F1: {f1_score(y_true, y_pred, average='macro', zero_division=0)}\n")
 
     cm = confusion_matrix(y_true, y_pred)
     
