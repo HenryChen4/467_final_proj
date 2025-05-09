@@ -26,9 +26,9 @@ Commands:
 python -m src.classification classifier=<classifier name> data=emotion_1
 ```
 
-The above command with train the classifier and evaluate its scores which are stored in the ./results directory under a directory named ./timestamp_classification_<classifier name>
+`The above command with train the classifier and evaluate its scores which are stored in the ./results directory under a directory named ./timestamp_classification_<classifier name>`
 
-Available classifiers:
+Available classifier names:
 - naive_bayes
 - softmax
 
@@ -50,7 +50,7 @@ Sometimes the LLM will take awhile to run. If you want to evaluate its current m
 python -m src.llm_eval results_dir=./results/<results_dir> data=emotion_1
 ```
 
-<results_dir> is the latest classification run directory that will be automatically generated in the ./results directory
+`<results_dir> is the latest classification run directory that will be automatically generated in the ./results directory`
 
 ### To evaluate the data:
 
@@ -64,4 +64,4 @@ python -m src.data_eval data=emotion_1
 python -m src.tuning results_dir=./results/<classifier_name>_tuning classifier=<classifier_name> data=emotion_1
 ```
 
-## Note: The directory ./results/<classifier_name>_tuning must already exist
+`## Note: The directory ./results/<classifier_name>_tuning must already exist`
